@@ -1,0 +1,149 @@
+.nav-container {
+    background-color: #6e98f5;
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logo {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+}
+
+.storeLogo {
+    height: 60px;
+    width: 80px;
+}
+
+
+.navList-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+}
+
+@media screen and (max-width: 768px) {
+    .navList-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        position: fixed;
+        height: 70px;
+        justify-content: space-around;
+        bottom: 0px;
+        border-top: 1px solid #000;
+        background-color: #6e98f5;
+        margin-bottom: 0px;
+        padding-left: 0px;
+    }
+
+    .header-container {
+        margin-left: 0px;
+        margin-right: 0px;
+        
+    }
+}
+
+.navIcon {
+    height: 25px;
+    width: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px;
+    transition: all ease-in-out 0.3s;
+}
+
+.nav-link:hover {
+    transform: translateY(-3px);
+  }
+
+.navItemName {
+    padding-left: 5px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        height: 50px;
+        width: 50px;
+        margin-left: 10px;
+    }
+
+    .storeLogo {
+        height: 50px;
+        width: 80px;
+    }
+
+    .navItemName {
+        display: none;
+    }
+}
+
+.cartListCountBadge{
+    background-color: #000;
+    color: #fff;
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 50%;
+    padding-left: 5px;
+    margin-top: 10px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    margin-bottom: 30px;
+    position: absolute;
+    margin-left: 14px;
+}
+
+.homeIcon{
+    display: none;
+}
+
+@media screen and (max-width: 768px){
+    .homeIcon{
+        display: flex;
+    }.lgThemeIcon{
+        display: none;
+    }
+}
+
+.dark-theme{
+    color: #000;
+}
+
+.light-theme{
+    color: #fff;
+}
+
+.smThemeIcon{
+    list-style: none;
+}
+
+@media screen and (min-width: 768px){ 
+    .smThemeIcon{
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 800px){
+    .smThemeIcon{
+        display: flex;
+    }
+}
