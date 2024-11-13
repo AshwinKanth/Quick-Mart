@@ -3,6 +3,7 @@ import Header from '../Header'
 import ProductItem from '../ProductItem'
 import LoaderView from '../LoaderView';
 import FailureView from '../FailureView';
+import HomeBanner from '../HomeBanner';
 import AppContext from '../../Context/AppContext';
 
 import './index.css';
@@ -82,6 +83,7 @@ class Home extends Component {
                     return (
                         <div>
                             <Header />
+                            <HomeBanner />
                             <div className={`home-container ${homeTheme}`}>
                                 {this.renderProductsView()}
                             </div>
