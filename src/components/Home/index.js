@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import Header from '../Header'
 import ProductItem from '../ProductItem'
+import LoaderView from '../LoaderView';
+import FailureView from '../FailureView';
 import AppContext from '../../Context/AppContext';
 
 import './index.css';
 
+const apiStatusConstant = {
+    success: "SUCCESS",
+    inProgress: "INPROGRESS",
+    failure: "FAILURE",
+    initial: "INITIAL"
+}
+
 class Home extends Component {
-    state = { productsData: [] }
+    state = { productsData: [], apiStatus: apiStatusConstant.initial }
 
     componentDidMount() {
         this.getProducts()
     }
 
     getProducts = async () => {
+        this.setState({ apiStatus: apiStatusConstant.inProgress })
         const apiUrl = 'https://fakestoreapi.in/api/products?limit=150'
         const options = {
             method: 'GET',
@@ -27,8 +37,9 @@ class Home extends Component {
                 price: each.price,
                 image: each.image
             }))
-            console.log(data)
-            this.setState({ productsData: fetchedProducts })
+            this.setState({ productsData: fetchedProducts, apiStatus: apiStatusConstant.success })
+        } else {
+            this.setState({ apiStatus: apiStatusConstant.failure })
         }
     }
 
@@ -44,6 +55,22 @@ class Home extends Component {
         )
     }
 
+    renderProductsView = () => {
+        const { apiStatus } = this.state
+
+        switch (apiStatus) {
+            case apiStatusConstant.success:
+                return this.renderProducts();
+            case apiStatusConstant.inProgress:
+                return <LoaderView />;
+            case apiStatusConstant.failure:
+                return <FailureView />;
+
+            default:
+                return null;
+        }
+    }
+
     render() {
         return (
             <AppContext.Consumer>
@@ -56,7 +83,7 @@ class Home extends Component {
                         <div>
                             <Header />
                             <div className={`home-container ${homeTheme}`}>
-                                {this.renderProducts()}
+                                {this.renderProductsView()}
                             </div>
                         </div>
                     )
