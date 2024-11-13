@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Header from "./components/Header"
+// import Header from "./components/Header"
+import Home from "./components/Home";
 import AppContext from "./Context/AppContext"
 
 
@@ -16,7 +17,7 @@ class App extends Component {
         isDarkTheme, toggleTheme: this.toggleTheme,
       }}>
         <div>
-          <Header />
+          <Home />
         </div>
       </AppContext.Provider>
     )
