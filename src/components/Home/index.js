@@ -34,6 +34,7 @@ class Home extends Component {
         if (response.ok === true) {
             const data = await response.json();
             const fetchedProducts = data.products.map(each => ({
+                id: each.id,
                 title: each.title,
                 price: each.price,
                 image: each.image

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-// import Header from "./components/Header"
+import { Route,Switch } from "react-router-dom";
 import Home from "./components/Home";
+import ProductDetails from "./components/ProductDetails";
 import AppContext from "./Context/AppContext"
 
 
@@ -16,9 +17,10 @@ class App extends Component {
       <AppContext.Provider value={{
         isDarkTheme, toggleTheme: this.toggleTheme,
       }}>
-        <div>
-          <Home />
-        </div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/products/:id" component={ProductDetails} />
+        </Switch>
       </AppContext.Provider>
     )
   }
