@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import { MdFavoriteBorder } from "react-icons/md";
+// import { MdFavoriteBorder } from "react-icons/md";
 import AppContext from "../../Context/AppContext";
 import "./index.css"
 
 const ProductItem = props => {
   const { productItemData } = props
-  const { title, price, image, id } = productItemData
+  const { title, price, thumbnail, id, rating, stock } = productItemData
 
-  const productTitle = title.slice(0, 30)
+  const productRating = String(rating).slice(0, 3);
+  const stockAvailability = stock > 10 ? "" : "Only few Left"
 
   return (
     <AppContext.Consumer>
@@ -20,13 +21,21 @@ const ProductItem = props => {
           <Link to={`/products/${id}`}>
             <div className={`card ${cardTheme}`}>
               <div className="card-details">
-                <img src={image} alt={title} className="productImage" />
-                <p className="text-title">{productTitle}...</p>
-                <div className="price-fav-container">
-                  <p className={`text-price ${priceColor}`}>₹ {price} /-</p>
-                  <button className="favButton" type="button"><MdFavoriteBorder size={20} /> </button>
+                <img src={thumbnail} alt={title} className="productImage" />
+                <p className="text-title">{title}</p>
+                <div className='price-rating-container'>
+                  <p className={`price ${priceColor}`}>₹{price} /-</p>
+                  <div className='rating-container'>
+                    <p className='product-rating'>{productRating}</p>
+                    <img
+                      src="https://assets.ccbp.in/frontend/react-js/star-img.png"
+                      alt="star"
+                      className="star"
+                    />
+                  </div>
                 </div>
               </div>
+              <p className='stock'>{stockAvailability}</p>
               <button className="card-button">More info</button>
             </div>
           </Link>

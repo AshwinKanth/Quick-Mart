@@ -24,7 +24,7 @@ class Home extends Component {
 
     getProducts = async () => {
         this.setState({ apiStatus: apiStatusConstant.inProgress })
-        const apiUrl = 'https://fakestoreapi.in/api/products?limit=150'
+        const apiUrl = 'https://dummyjson.com/products?limit=0'
         const options = {
             method: 'GET',
         }
@@ -37,7 +37,9 @@ class Home extends Component {
                 id: each.id,
                 title: each.title,
                 price: each.price,
-                image: each.image
+                thumbnail: each.thumbnail,
+                rating: each.rating,
+                stock: each.stock
             }))
             this.setState({ productsData: fetchedProducts, apiStatus: apiStatusConstant.success })
         } else {

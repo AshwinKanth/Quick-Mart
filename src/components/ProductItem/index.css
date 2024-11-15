@@ -9,7 +9,7 @@
     overflow: visible;
     margin-right: 30px;
     margin-bottom: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
     
    }
    
@@ -20,6 +20,7 @@
     display: grid;
     place-content: center;
     padding-top: 10px;
+    /* background-color:red; */
    }
    
    .card-button {
@@ -36,16 +37,13 @@
     bottom: 0;
     opacity: 0;
     transition: 0.3s ease-out;
+    cursor: pointer;
    }
-   
-   .text-price {
-    font-weight: bold;
-   }
-   
 
    .text-title {
     font-size: 14px;
     font-weight: bold;
+    text-align: center;
    }
    
    .card:hover {
@@ -64,11 +62,36 @@
     border-radius: 10px;
    }
 
-.price-fav-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+
+.price-rating-container{
+    display: flex;  
     justify-content: space-between;
+    align-items: center;
+}
+
+.rating-container{
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient( #8d07a8, #c710be);
+    border-radius: 4px;
+    padding: 4px 8px;
+    height: 20px;
+}
+
+.star{
+    height: 15px;
+}
+
+.product-rating{
+    color: #fff;
+    font-size: 13px;
+    font-family: "Roboto";
+}
+
+.price{
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "Roboto";
 }
 
 .favButton{
@@ -112,4 +135,11 @@
     width: 165px;
     height: 280px;
     }
+}
+
+.stock{
+    color: red;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: "Roboto";
 }
