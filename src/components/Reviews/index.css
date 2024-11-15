@@ -1,0 +1,75 @@
+.reviewsContainer{
+    padding: 15px;
+}
+
+.borderDark{
+    border-bottom: 1px solid  #6e98f5;
+}
+
+.borderLight{
+    border-bottom: 1px solid #c7c2c2;
+}
+
+.rating-comment-container{
+    display: flex;
+    align-items: center;
+}
+
+.revieweRating-container{
+    display: flex;
+    align-items: center;
+    background-color: green;
+    border-radius: 4px;
+    padding: 4px 8px;
+    height: 20px;
+    width: 25px;
+    margin-right: 10px;
+}
+
+.reviewerDetails{
+    display: flex;
+    align-items: center;
+}
+
+.reviewerName{
+    padding-right: 10px;
+    font-size: 14px;
+    font-family: "Roboto";
+    color: #898787;
+}
+
+.date{
+    font-size: 14px;
+    font-family: "Roboto";
+    color: #898787;
+}
+
+.comment{
+    font-size: 14px;
+    font-family: "Roboto";
+}
+
+.details-like-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.likeDislike-container{
+    display: flex;
+    align-items: center;
+}
+
+.likeIcon{
+    padding-right: 10px;
+    color: #898787;
+    font-family: "Roboto";
+    font-size: 14px;
+}
+
+.dislikeIcon{
+    font-family: "Roboto";
+    color: #898787;
+    font-size: 14px
+}

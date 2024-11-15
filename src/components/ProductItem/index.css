@@ -119,10 +119,11 @@
 
 @media screen and (max-width: 768px){
     .card{
-    width: 120px;
+    width: 160px;
     height: 280px;
     margin: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 100px;
+    padding: 10px;
     }.card-details{
         padding-top: 0px;
     }.text-title{
@@ -142,4 +143,6 @@
     font-size: 13px;
     font-weight: 500;
     font-family: "Roboto";
+    margin-top: 0px;
+
 }

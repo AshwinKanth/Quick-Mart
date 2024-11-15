@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-// import { MdFavoriteBorder } from "react-icons/md";
 import AppContext from "../../Context/AppContext";
 import "./index.css"
 
@@ -18,27 +17,28 @@ const ProductItem = props => {
         const priceColor = isDarkTheme ? "priceDark" : "priceLight"
 
         return (
-          <Link to={`/products/${id}`}>
-            <div className={`card ${cardTheme}`}>
-              <div className="card-details">
-                <img src={thumbnail} alt={title} className="productImage" />
-                <p className="text-title">{title}</p>
-                <div className='price-rating-container'>
-                  <p className={`price ${priceColor}`}>₹{price} /-</p>
-                  <div className='rating-container'>
-                    <p className='product-rating'>{productRating}</p>
-                    <img
-                      src="https://assets.ccbp.in/frontend/react-js/star-img.png"
-                      alt="star"
-                      className="star"
-                    />
-                  </div>
+          <div className={`card ${cardTheme}`}>
+            <div className="card-details">
+              <img src={thumbnail} alt={title} className="productImage" />
+              <p className="text-title">{title}</p>
+              <div className='price-rating-container'>
+                <p className={`price ${priceColor}`}>₹{price} /-</p>
+                <div className='rating-container'>
+                  <p className='product-rating'>{productRating}</p>
+                  <img
+                    src="https://assets.ccbp.in/frontend/react-js/star-img.png"
+                    alt="star"
+                    className="star"
+                  />
                 </div>
               </div>
               <p className='stock'>{stockAvailability}</p>
-              <button className="card-button">More info</button>
             </div>
-          </Link>
+            <Link to={`/products/${id}`}>
+              <button className="card-button">More info</button>
+            </Link>
+          </div>
+
         )
       }}
     </AppContext.Consumer>
