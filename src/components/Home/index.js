@@ -5,6 +5,7 @@ import LoaderView from '../LoaderView';
 import FailureView from '../FailureView';
 import HomeBanner from '../HomeBanner';
 import AppContext from '../../Context/AppContext';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 
 import './index.css';
 
@@ -16,7 +17,7 @@ const apiStatusConstant = {
 }
 
 class Home extends Component {
-    state = { productsData: [], apiStatus: apiStatusConstant.initial }
+    state = { productsData: [], searchInput: '', currentPage: 0, apiStatus: apiStatusConstant.initial }
 
     componentDidMount() {
         this.getProducts()
@@ -24,7 +25,14 @@ class Home extends Component {
 
     getProducts = async () => {
         this.setState({ apiStatus: apiStatusConstant.inProgress })
-        const apiUrl = 'https://dummyjson.com/products?limit=0'
+        const { searchInput, currentPage } = this.state
+        let apiUrl;
+
+        if (searchInput === "") {
+            apiUrl = `https://dummyjson.com/products?limit=20&skip=${currentPage * 20}`
+        } else {
+            apiUrl = `https://dummyjson.com/products/search?q=${searchInput}&limit=0`
+        }
         const options = {
             method: 'GET',
         }
@@ -49,14 +57,36 @@ class Home extends Component {
 
     renderProducts = () => {
         const { productsData } = this.state
+        const shouldShowProductsList = productsData.length > 0
 
-        return (
+        return shouldShowProductsList ? (
+
             <ul className='products-container'>
                 {productsData.map(eachProduct => (
                     <ProductItem key={eachProduct.id} productItemData={eachProduct} />
                 ))}
             </ul>
+        ) : (
+            <div className="no-products-view">
+                <img
+                    src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png"
+                    className="no-products-img"
+                    alt="no products"
+                />
+                <h1 className="no-products-heading">No Products Found</h1>
+                <p className="no-products-description">
+                    We could not find any products.
+                </p>
+            </div>
         )
+    }
+
+    changeSearchInput = searchInput => {
+        this.setState({ searchInput })
+    }
+
+    enterSearchInput = () => {
+        this.getProducts()
     }
 
     renderProductsView = () => {
@@ -75,7 +105,26 @@ class Home extends Component {
         }
     }
 
+    onClickRightArrow = () => {
+        const { currentPage } = this.state
+
+        if (currentPage < 9) {
+            this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }), this.getProducts)
+        }
+    }
+
+    onClickLeftArrow = () => {
+        const { currentPage } = this.state
+
+        if (currentPage > 0) {
+            this.setState(prevState => ({ currentPage: prevState.currentPage - 1 }), this.getProducts)
+        }
+    }
+
+
+
     render() {
+        const { searchInput, currentPage, productsData } = this.state
         return (
             <AppContext.Consumer>
                 {value => {
@@ -85,10 +134,24 @@ class Home extends Component {
 
                     return (
                         <div>
-                            <Header />
+                            <Header searchInput={searchInput} changeSearchInput={this.changeSearchInput} enterSearchInput={this.enterSearchInput} />
                             <HomeBanner />
                             <div className={`home-container ${homeTheme}`}>
                                 {this.renderProductsView()}
+                                {productsData.length > 13 ? (
+                                    <div className="restaurantNavigation">
+                                        <button className="angleIcon" type="button" onClick={this.onClickLeftArrow}>
+                                            <MdKeyboardArrowLeft size={20} />
+                                        </button>
+                                        <p className="pageNum">{currentPage + 1} of 10</p>
+                                        <button className="angleIcon" type="button" onClick={this.onClickRightArrow}>
+                                            <MdKeyboardArrowRight size={20} />
+                                        </button>
+                                    </div>
+
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     )
