@@ -15,7 +15,7 @@ const CartSummary = () => (
             return (
                 <div className="cartSummary-container">
                     <h1 className="cartSummaryHeading">Cart Summary</h1>
-                    <h1 className="order-total">Order Total: <span className="orderTotal-span">$ {total} /-</span></h1>
+                    <h1 className="order-total">Order Total: <span className="orderTotal-span">$ {totalAmount} /-</span></h1>
                     <p className="cartItems-count">{cartList.length} items in cart</p>
                     <Link to="/checkout" className="nav-link">
                         <button className="checkOutButton" type="button">Proceed to Checkout</button>
