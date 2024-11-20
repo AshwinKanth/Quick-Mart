@@ -14,15 +14,11 @@ const CartSummary = () => (
             const totalAmount = total.toFixed(2)
             return (
                 <div className="cartSummary-container">
-                    <div className="total-container">
-                        <h1 className="order-total">Order Total:</h1>
-                        <h1 className="total">Rs {totalAmount}/-</h1>
-                    </div>
-                    <p className="items-count">{cartList.length} items in cart</p>
-                    <Link to="/login">
-                        <button type="button" className="checkout-button">
-                            Checkout
-                        </button>
+                    <h1 className="cartSummaryHeading">Cart Summary</h1>
+                    <h1 className="order-total">Order Total: <span className="orderTotal-span">$ {total} /-</span></h1>
+                    <p className="cartItems-count">{cartList.length} items in cart</p>
+                    <Link to="/checkout" className="nav-link">
+                        <button className="checkOutButton" type="button">Proceed to Checkout</button>
                     </Link>
                 </div>
             )
