@@ -57,11 +57,42 @@
 
 
 .fav-empty-img{
-    width: 15%;
+    width: 15%; 
 }
 
 @media screen and (max-width: 768px){
     .fav-empty-img{
         width: 60%;
+    }
+}
+
+.fav-empty-heading{
+    font-size: 20px;
+    color: #000;
+    margin-top: 0px;
+}
+
+.exploreButton{
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.exploreButton:hover{
+    background-color: #008bf8;
+    color: #fff;
+}
+
+@media (min-width: 768px) and (max-width: 1100px){
+    .fav-empty-img{
+        width: 50%;
+    }.fav-empty-heading{
+        font-size: 30px;
     }
 }
