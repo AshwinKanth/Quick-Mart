@@ -27,6 +27,7 @@ class ProductDetails extends Component {
 
     getFormattedData = (data) => ({
         images: data.images[0],
+        id: data.id,
         title: data.title,
         price: data.price,
         description: data.description,
@@ -86,7 +87,6 @@ class ProductDetails extends Component {
     }
 
 
-
     renderProductDetails = () => {
         const { productsDetailsData, quantity, reviewsData } = this.state
         const { title, images, price, description, brand, category, rating, returnPolicy, stock, warrantyInformation, shippingInformation, availabilityStatus } = productsDetailsData
@@ -97,17 +97,21 @@ class ProductDetails extends Component {
         return (
             <AppContext.Consumer>
                 {value => {
-                    const { isDarkTheme } = value
+                    const { isDarkTheme,addCartItem } = value
 
                     const homeTheme = isDarkTheme ? 'dark' : 'light'
                     const borderColor = isDarkTheme ? "borderDark" : "borderLight"
+
+                    const onClickAddCart = () =>{
+                        addCartItem({...productsDetailsData,quantity})
+                    }
 
                     return (
                         <div className={`productDetails ${homeTheme}`}>
                             <div className="image-buttons-container">
                                 <img src={images} alt={title} className={`image ${borderColor}`} />
                                 <div className="buttons-container">
-                                    <button type="button" className="buttons addCart" onClick={this.onClickAddCart}><BsCart3 size={14} /> ADD TO CART</button>
+                                    <button type="button" className="buttons addCart" onClick={onClickAddCart}><BsCart3 size={14} /> ADD TO CART</button>
                                     <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
                                 </div>
                             </div>
@@ -142,7 +146,7 @@ class ProductDetails extends Component {
                                 <p className="productStock">{stockAvailability}</p>
                                 <p className="returnPolicy"><span className="span">Return policy:</span> {returnPolicy}</p>
                                 <div className="smButtons-container">
-                                    <button type="button" className="buttons addCart" onClick={this.onClickAddCart}><BsCart3 size={14} /> ADD TO CART</button>
+                                    <button type="button" className="buttons addCart" onClick={onClickAddCart}><BsCart3 size={14} /> ADD TO CART</button>
                                     <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
                                 </div>
                                 <hr className={`break ${borderColor}`} />

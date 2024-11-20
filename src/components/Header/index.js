@@ -10,22 +10,39 @@ import "./index.css";
 
 class Header extends Component {
 
-  renderFavItemsCount = () =>(
+  renderFavItemsCount = () => (
     <AppContext.Consumer>
-        {value => {
-            const {favoriteList} = value
-            const favItemsCount = favoriteList.length
+      {value => {
+        const { favoriteList } = value
+        const favItemsCount = favoriteList.length
 
-            return(
-                <>
-                    {favItemsCount > 0 ? (
-                        <span className="cartListCountBadge">{favoriteList.length}</span>
-                    ):null}
-                </>
-            )
-        }}
+        return (
+          <>
+            {favItemsCount > 0 ? (
+              <span className="cartListCountBadge">{favoriteList.length}</span>
+            ) : null}
+          </>
+        )
+      }}
     </AppContext.Consumer>
-)
+  )
+
+  renderCartItemsCount = () => (
+    <AppContext.Consumer>
+      {value => {
+        const { cartList } = value
+        const cartItemsCount = cartList.length
+
+        return (
+          <>
+            {cartItemsCount > 0 ? (
+              <span className="cartListCountBadge">{cartList.length}</span>
+            ) : null}
+          </>
+        )
+      }}
+    </AppContext.Consumer>
+  )
   render() {
     const { searchInput } = this.props
 
@@ -92,6 +109,7 @@ class Header extends Component {
                     <li>
                       <MdOutlineShoppingBag className="navIcon" />
                     </li>
+                    {this.renderCartItemsCount()}
                     <p className="navItemName">Cart</p>
                   </Link>
                   <Link to="/login" className={`nav-link ${themeClass}`}>
