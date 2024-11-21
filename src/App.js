@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
 import Favorite from "./components/Favorite";
 import Cart from "./components/Cart";
+import ProductCategory from "./components/ProductCategory";
 import AppContext from "./Context/AppContext"
 
 
@@ -116,6 +117,7 @@ class App extends Component {
           <Route exact path="/products/:id" component={ProductDetails} />
           <Route exact path="/favorite" component={Favorite} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path='/products/category/:slug' component={ProductCategory} />
         </Switch>
       </AppContext.Provider>
     )

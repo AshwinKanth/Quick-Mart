@@ -4,6 +4,7 @@ import ProductItem from '../ProductItem'
 import LoaderView from '../LoaderView';
 import FailureView from '../FailureView';
 import HomeBanner from '../HomeBanner';
+import Filters from '../Filters';
 import AppContext from '../../Context/AppContext';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 
@@ -136,6 +137,7 @@ class Home extends Component {
                         <div>
                             <Header searchInput={searchInput} changeSearchInput={this.changeSearchInput} enterSearchInput={this.enterSearchInput} />
                             <HomeBanner />
+                            <Filters />
                             <div className={`home-container ${homeTheme}`}>
                                 {this.renderProductsView()}
                                 {productsData.length > 13 ? (

@@ -1,0 +1,32 @@
+.filters-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+    width: 100%;
+
+}
+
+@media screen and (max-width: 768px){
+    .filters-container{
+      width: 100%;
+    }
+}
+
+.productCategoryList{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-left: 30px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .productCategoryList{
+        padding: 10px;
+        margin: 0px;
+    }
+}

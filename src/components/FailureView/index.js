@@ -1,4 +1,5 @@
 import AppContext from "../../Context/AppContext";
+import { Link } from 'react-router-dom'
 import "./index.css"
 
 const FailureView = (props) => {
@@ -18,9 +19,11 @@ const FailureView = (props) => {
                             className="no-products-image"
                         />
                         <h1 className="failureHeading">Oops! Something Went Wrong</h1>
-                        <button type="button" className="failureButton">
-                            Retry
-                        </button>
+                        <Link to="/">
+                            <button type="button" className="failureButton">
+                                Retry
+                            </button>
+                        </Link>
                     </div>
                 )
             }}
