@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "../Header";
 import LoaderView from "../LoaderView";
 import FailureView from "../FailureView";
@@ -45,8 +47,8 @@ class ProductDetails extends Component {
         comment: data.comment,
         date: data.date,
         reviewerName: data.reviewerName
-      })
-    
+    })
+
 
     getProductDetails = async () => {
         this.setState({ apiStatus: apiStatusConstant.inProgress })
@@ -66,8 +68,8 @@ class ProductDetails extends Component {
             const updatedData = this.getFormattedData(fetchedData)
             const updateReviewsData = fetchedData.reviews.map(
                 eachReview => this.getReviewsData(eachReview)
-              )
-            this.setState({ productsDetailsData: updatedData, reviewsData: updateReviewsData ,apiStatus: apiStatusConstant.success })
+            )
+            this.setState({ productsDetailsData: updatedData, reviewsData: updateReviewsData, apiStatus: apiStatusConstant.success })
         } else {
             this.setState({ apiStatus: apiStatusConstant.failure })
         }
@@ -94,24 +96,38 @@ class ProductDetails extends Component {
         const productRating = String(rating).slice(0, 3);
         const stockAvailability = stock > 10 ? "" : "Only few Left";
 
+
         return (
             <AppContext.Consumer>
                 {value => {
-                    const { isDarkTheme,addCartItem } = value
+                    const { isDarkTheme, addCartItem } = value
 
                     const homeTheme = isDarkTheme ? 'dark' : 'light'
                     const borderColor = isDarkTheme ? "borderDark" : "borderLight"
 
-                    const onClickAddCart = () =>{
-                        addCartItem({...productsDetailsData,quantity})
+                    const onClickAddCart = () => {
+                        addCartItem({ ...productsDetailsData, quantity })
+
                     }
+
+                    const handleAddToCart = () => {
+                        onClickAddCart();
+                        toast.success(
+                            <div className="addCardSuccess-conatiner">
+                                <img src={images} alt="" className="addCartImage" />
+                                <p>{title} added to cart!</p>
+                            </div>, {
+                            position: "bottom-right",
+                            autoClose: 3000,
+                        });
+                    };
 
                     return (
                         <div className={`productDetails ${homeTheme}`}>
                             <div className="image-buttons-container">
                                 <img src={images} alt={title} className={`image ${borderColor}`} />
                                 <div className="buttons-container">
-                                    <button type="button" className="buttons addCart" onClick={onClickAddCart}><BsCart3 size={14} /> ADD TO CART</button>
+                                    <button type="button" className="buttons addCart" onClick={handleAddToCart} ><BsCart3 size={14} /> ADD TO CART</button>
                                     <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
                                 </div>
                             </div>
@@ -146,7 +162,7 @@ class ProductDetails extends Component {
                                 <p className="productStock">{stockAvailability}</p>
                                 <p className="returnPolicy"><span className="span">Return policy:</span> {returnPolicy}</p>
                                 <div className="smButtons-container">
-                                    <button type="button" className="buttons addCart" onClick={onClickAddCart}><BsCart3 size={14} /> ADD TO CART</button>
+                                    <button type="button" className="buttons addCart" onClick={handleAddToCart}><BsCart3 size={14} /> ADD TO CART</button>
                                     <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
                                 </div>
                                 <hr className={`break ${borderColor}`} />
@@ -198,6 +214,7 @@ class ProductDetails extends Component {
                 <Header />
                 <div className="productDetails-container">
                     {this.renderProductsDetailsView()}
+                    <ToastContainer />
                 </div>
             </>
         )
