@@ -5,7 +5,9 @@ import ProductDetails from "./components/ProductDetails";
 import Favorite from "./components/Favorite";
 import Cart from "./components/Cart";
 import ProductCategory from "./components/ProductCategory";
+import Login from "./components/Login";
 import AppContext from "./Context/AppContext"
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 class App extends Component {
@@ -113,11 +115,12 @@ class App extends Component {
           IncrementCartItemQuantity: this.IncrementCartItemQuantity, decrementCartItemQuantity: this.decrementCartItemQuantity,
       }}>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/products/:id" component={ProductDetails} />
-          <Route exact path="/favorite" component={Favorite} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path='/products/category/:slug' component={ProductCategory} />
+          <Route path="/login" component={Login} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/products/:id" component={ProductDetails} />
+          <ProtectedRoute exact path="/favorite" component={Favorite} />
+          <ProtectedRoute exact path="/cart" component={Cart} />
+          <ProtectedRoute exact path='/products/category/:slug' component={ProductCategory} />
         </Switch>
       </AppContext.Provider>
     )

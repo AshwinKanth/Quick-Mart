@@ -1,0 +1,134 @@
+.login-container {
+    background: linear-gradient(135deg, #6e98f5, #aec3f1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.loginCard-container {
+    background-color: #fff;
+    padding: 20px 30px 40px;
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.loginLogo{
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    margin-bottom: 40px;
+}
+
+.loginHeading {
+    text-align: center;
+    color: #1058f5;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group .label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 94%;
+    padding: 10px;
+    border: 2px solid #6e98f5;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+}
+
+@media  screen and (max-width: 768px) {
+    .loginCard-container{
+        width: 70%;
+    }.form-group input{
+        width: 93%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1100px){
+    .form-group input{
+        width: 95%;
+    }.loginCard-container{
+        width: 50%;
+    }.loginLogo{
+        height: 120px;
+        width: 120px;
+        border-radius: 60px;
+    }
+}
+
+.form-group input:focus {
+    border-color: #6e98f5;
+}
+
+.show-password {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.show-password input {
+    cursor: pointer;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #6e98f5, #aec3f1);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #6e98f5, #849cd1);
+}
+
+
+.password-group {
+    position: relative;
+}
+
+.password-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #6e98f5;
+    transition: 0.3s;
+}
+
+.toggle-password:hover {
+    color: #6e98f5;
+}
+
+.err-msg{
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}

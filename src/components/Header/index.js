@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Popup from 'reactjs-popup'
+import Cookies from "js-cookie";
+import { withRouter } from 'react-router-dom'
 import { FaRegUser, FaRegMoon } from "react-icons/fa";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineFavoriteBorder, MdOutlineShoppingBag, MdOutlineWbSunny } from "react-icons/md";
@@ -9,6 +12,12 @@ import { IoSearchCircle } from "react-icons/io5";
 import "./index.css";
 
 class Header extends Component {
+
+  onClickLogout = () => {
+    Cookies.remove('jwt_token')
+    const { history } = this.props
+    history.replace('/login')
+  }
 
   renderFavItemsCount = () => (
     <AppContext.Consumer>
@@ -112,12 +121,36 @@ class Header extends Component {
                     {this.renderCartItemsCount()}
                     <p className="navItemName">Cart</p>
                   </Link>
-                  <Link to="/login" className={`nav-link ${themeClass}`}>
-                    <li>
-                      <FaRegUser className="navIcon" />
-                    </li>
-                    <p className="navItemName">Login</p>
-                  </Link>
+                  <div>
+                    <Popup
+                      modal
+                      trigger={
+                        <button className={`nav-link logOutBtn ${themeClass}`} >
+                          <li>
+                            <FaRegUser className="navIcon" />
+                          </li>
+                          <p className="navItemName">Logout</p>
+                        </button>
+                      }
+                    >
+                      {close => (
+
+                        <div className="popup-container">
+                          <p className="popupDescription">Are you sure you want to Logout from Quick Mart?</p>
+                          <div>
+                            <button
+                              type="button"
+                              className="trigger-button"
+                              onClick={() => close()}
+                            >
+                              Close
+                            </button>
+                            <button className="logOutButton navItem" onClick={this.onClickLogout}>Logout</button>
+                          </div>
+                        </div>
+                      )}
+                    </Popup>
+                  </div>
                 </ul>
               </div>
             </nav>
@@ -129,4 +162,4 @@ class Header extends Component {
 }
 
 
-export default Header;
+export default withRouter(Header);

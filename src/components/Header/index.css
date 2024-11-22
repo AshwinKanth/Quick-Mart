@@ -75,7 +75,7 @@
 
 .navItemName {
     padding-left: 5px;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 15px;
 }
 
@@ -172,5 +172,70 @@
     .search-container{
         margin: 10px;
         width: 50%;
+    }
+}
+
+.logOutBtn{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.popup-container {
+    background-color: #b3cdee;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    text-align: center;
+}
+
+.popupDescription {
+    font-size: 16px;
+    font-family: "Roboto";
+    font-weight: 500;
+    width: 280px;
+    line-height: 2;
+}
+
+.trigger-button {
+    background-color: rgb(72, 108, 239);
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    height: 30px;
+    width: 70px;
+    margin: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    cursor: pointer;
+}
+
+.logOutButton {
+    background-color: #F7931E;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    height: 30px;
+    width: 70px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .logOutButton {
+        font-size: 13px;
+        height: 30px;
+        width: 70px;
+        color: #fff;
     }
 }
