@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from "../Header";
@@ -128,7 +129,9 @@ class ProductDetails extends Component {
                                 <img src={images} alt={title} className={`image ${borderColor}`} />
                                 <div className="buttons-container">
                                     <button type="button" className="buttons addCart" onClick={handleAddToCart} ><BsCart3 size={14} /> ADD TO CART</button>
-                                    <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
+                                    <Link to="/orderSuccess">
+                                        <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="productInformation-container">
@@ -163,7 +166,9 @@ class ProductDetails extends Component {
                                 <p className="returnPolicy"><span className="span">Return policy:</span> {returnPolicy}</p>
                                 <div className="smButtons-container">
                                     <button type="button" className="buttons addCart" onClick={handleAddToCart}><BsCart3 size={14} /> ADD TO CART</button>
-                                    <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
+                                    <Link to="/orderSuccess">
+                                        <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
+                                    </Link>
                                 </div>
                                 <hr className={`break ${borderColor}`} />
                                 <div className="additionalInformation">

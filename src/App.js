@@ -6,6 +6,8 @@ import Favorite from "./components/Favorite";
 import Cart from "./components/Cart";
 import ProductCategory from "./components/ProductCategory";
 import Login from "./components/Login";
+import Checkout from "./components/Checkout";
+import OrderPlaced from "./components/OrderPlaced";
 import AppContext from "./Context/AppContext"
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -121,6 +123,8 @@ class App extends Component {
           <ProtectedRoute exact path="/favorite" component={Favorite} />
           <ProtectedRoute exact path="/cart" component={Cart} />
           <ProtectedRoute exact path='/products/category/:slug' component={ProductCategory} />
+          <ProtectedRoute exact path="/checkout" component={Checkout} />
+          <ProtectedRoute exact path="/orderSuccess" component={OrderPlaced} />
         </Switch>
       </AppContext.Provider>
     )
