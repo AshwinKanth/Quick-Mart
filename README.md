@@ -8,7 +8,7 @@
 
 > Demo
 
-*    
+*    https://quick-mart-tau.vercel.app/login
 
 
 ## Development
