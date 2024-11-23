@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route,Switch } from "react-router-dom";
+import { Route,Switch,Redirect } from "react-router-dom";
 import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
 import Favorite from "./components/Favorite";
@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Checkout from "./components/Checkout";
 import OrderPlaced from "./components/OrderPlaced";
 import AppContext from "./Context/AppContext"
+import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -125,6 +126,8 @@ class App extends Component {
           <ProtectedRoute exact path='/products/category/:slug' component={ProductCategory} />
           <ProtectedRoute exact path="/checkout" component={Checkout} />
           <ProtectedRoute exact path="/orderSuccess" component={OrderPlaced} />
+          <Route exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
         </Switch>
       </AppContext.Provider>
     )

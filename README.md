@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Title
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    Quick Mart Application
 
-## Available Scripts
+## Objective
 
-In the project directory, you can run:
+    Build an application that allows users to browse and search for products, view product details, add products to a shopping cart, add products to favorite and place an order.
 
-### `npm start`
+> Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+*    
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    git clone <github repository link>  
+    npm install
+    npm start
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Frontend - React JS (React Router, Redux or React Context API, CSS or CSS frameworks, Git, and GitHub for hosting the repository.)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Completion Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Functionality
 
-### `npm run eject`
+#### Must Have
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+*  Build a ReactJS application with multiple pages/components, including Home, Book Details, Shopping Cart, favorite and Checkout pages.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+*    Implement features such as product search, product filtering, adding to cart, removing from cart, adding to favorite, removing from favorite and order placement.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Nice to Have
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    Bonus tasks include implementing user authentication, unit tests, and deploying the application on a hosting platform.
 
-## Learn More
+### Routes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Page                | Route                 | Path
+| --------------------| ----------------------| ------
+| Home                | Home                  | /
+| product Deatils     | product Details       | /products/:id
+| Cart                | Cart                  | /cart
+| Favorite            | Favorite              | /favorite
+| Checkout            | Checkout              | /checkout
+| order Success       | Order Success         | /orderSuccess
+| Not Found           | Not Found             | /not-found
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Guidelines to develop a project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Must Have
 
-### Analyzing the Bundle Size
+*  Utilize GitHub
+-  Commit code regularly and commit messages should be clear
+-  Include a README file explaining the project setup, usage instructions, and any additional information
+-  The repo should be well organized and easy to understand.
+-  The code should be clean, modular, and well-structured
+*  The application should be visually appealing.
+*  The application should handle all the errors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### Nice to Have
 
-### Making a Progressive Web App
+* Implement Unit Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Submission Instructions
 
-### Advanced Configuration
+#### Must Have
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    List the Instructions to follow while submitting the project mentioned in the Assignment, if any
 
-### Deployment
+#### Nice to Have
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    List the suggested instructions to follow while submitting the project mentioned in the Assignment, if any
 
-### `npm run build` fails to minify
+## Resources
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Design files
+
+    Home, Book Details, Shopping Cart, Favorite, Checkout,order Success
+
+
+ ####  Api Reference: https://dummyjson.com/products
+
+### Third-party packages
+
+    Icons (react-icons)
+    Loader (react-loader-spinner)
+    date (date-fns)
+    cookies (js-cookies)
+    Order Placed Animation (lottie-react)
+    Carousel (react-slick)
+    Item Added to cart Card (react-toastify)
+    pop up (reactjs-popup)
