@@ -1,7 +1,11 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import Header from "../Header";
 import LoaderView from "../LoaderView";
 import FailureView from "../FailureView";
@@ -11,8 +15,7 @@ import "./index.css"
 
 import { BsCart3 } from "react-icons/bs";
 import { MdElectricBolt } from "react-icons/md";
-import { CiCirclePlus } from "react-icons/ci";
-import { CiCircleMinus } from "react-icons/ci";
+import { CiCirclePlus,CiCircleMinus } from "react-icons/ci";
 
 const apiStatusConstant = {
     success: "SUCCESS",
@@ -22,7 +25,7 @@ const apiStatusConstant = {
 }
 
 class ProductDetails extends Component {
-    state = { productsDetailsData: [], quantity: 1, reviewsData: [], apiStatus: apiStatusConstant.initial }
+    state = { productsDetailsData: [], quantity: 1, reviewsData: [], imagesList: [], apiStatus: apiStatusConstant.initial }
 
     componentDidMount() {
         this.getProductDetails()
@@ -50,6 +53,11 @@ class ProductDetails extends Component {
         reviewerName: data.reviewerName
     })
 
+    getCaurosalImagesData = (data) => ({
+        images: data.images,
+        id: data.id
+    })
+
 
     getProductDetails = async () => {
         this.setState({ apiStatus: apiStatusConstant.inProgress })
@@ -70,7 +78,8 @@ class ProductDetails extends Component {
             const updateReviewsData = fetchedData.reviews.map(
                 eachReview => this.getReviewsData(eachReview)
             )
-            this.setState({ productsDetailsData: updatedData, reviewsData: updateReviewsData, apiStatus: apiStatusConstant.success })
+            const updatedCaurosalImages = fetchedData.images;
+            this.setState({ productsDetailsData: updatedData, reviewsData: updateReviewsData, imagesList: updatedCaurosalImages, apiStatus: apiStatusConstant.success })
         } else {
             this.setState({ apiStatus: apiStatusConstant.failure })
         }
@@ -89,9 +98,35 @@ class ProductDetails extends Component {
         }
     }
 
+    renderProductImages = () => {
+        var settings = {
+            dots: true,
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            pauseOnHover: true,
+        };
+
+        const { imagesList } = this.state
+
+        return (
+            <div className="images-container">
+                <Slider {...settings}>
+                    {imagesList.map(eachImage => (
+                        <div key={eachImage.id}>
+                            <img src={eachImage} alt="" className="slider-image" />
+                        </div>
+                    ))}
+                </Slider>
+            </div>
+        )
+    }
+
 
     renderProductDetails = () => {
-        const { productsDetailsData, quantity, reviewsData } = this.state
+        const { productsDetailsData, quantity, reviewsData,imagesList } = this.state
         const { title, images, price, description, brand, category, rating, returnPolicy, stock, warrantyInformation, shippingInformation, availabilityStatus } = productsDetailsData
 
         const productRating = String(rating).slice(0, 3);
@@ -126,7 +161,11 @@ class ProductDetails extends Component {
                     return (
                         <div className={`productDetails ${homeTheme}`}>
                             <div className="image-buttons-container">
-                                <img src={images} alt={title} className={`image ${borderColor}`} />
+                                {imagesList.length > 1 ? (
+                                    this.renderProductImages()
+                                ) : (
+                                    <img src={images} alt={title} className={`image ${borderColor}`} />
+                                )}
                                 <div className="buttons-container">
                                     <button type="button" className="buttons addCart" onClick={handleAddToCart} ><BsCart3 size={14} /> ADD TO CART</button>
                                     <Link to="/orderSuccess">
@@ -170,17 +209,17 @@ class ProductDetails extends Component {
                                         <button type="button" className="buttons buyNow"> <MdElectricBolt size={14} /> BUY NOW</button>
                                     </Link>
                                 </div>
-                                <hr className={`break ${borderColor}`} />
+                                <hr className="break" />
                                 <div className="additionalInformation">
                                     <h1 className="informationHeading">Additional Information</h1>
                                     <p className="information"><span className="span">Warranty:</span> {warrantyInformation}</p>
                                     <p className="information"><span className="span">Shipping:</span> {shippingInformation}</p>
                                     <p className="information"><span className="span">Stock Availability:</span> {availabilityStatus}</p>
                                 </div>
-                                <hr className={`break ${borderColor}`} />
+                                <hr className="break" />
                                 <div className="reviews-rating-container">
                                     <h1 className="informationHeading">Rating & Reviews</h1>
-                                    <ul className={`reviewsList-container ${borderColor}`}>
+                                    <ul className="reviewsList-container">
                                         {reviewsData.map(eachProduct => (
                                             <Reviews
                                                 reviewDetails={eachProduct}

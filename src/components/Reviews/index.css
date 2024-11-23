@@ -1,13 +1,6 @@
 .reviewsContainer{
     padding: 15px;
-}
-
-.borderDark{
-    border-bottom: 1px solid  #6e98f5;
-}
-
-.borderLight{
-    border-bottom: 1px solid #c7c2c2;
+    border-bottom: 1px solid #f2d2d2;
 }
 
 .rating-comment-container{
