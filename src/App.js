@@ -14,8 +14,22 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 
 class App extends Component {
-  state = { isDarkTheme: false,favoriteList:[],cartList:[] }
+  state = { isDarkTheme: false,
+    favoriteList:JSON.parse(localStorage.getItem('favoriteList')) || [],
+    cartList:JSON.parse(localStorage.getItem('cartList')) || [] }
 
+
+  componentDidUpdate(prevState) {
+    if (prevState.favoriteList !== this.state.favoriteList) {
+      localStorage.setItem("favoriteList", JSON.stringify(this.state.favoriteList));
+    }
+
+    if (prevState.cartList !== this.state.cartList) {
+      localStorage.setItem("cartList", JSON.stringify(this.state.cartList));
+    }
+  }
+
+ 
   toggleTheme = () => {
     this.setState(prevState => ({ isDarkTheme: !prevState.isDarkTheme }));
   }
@@ -59,7 +73,8 @@ class App extends Component {
           }
           return eachCartItem
         })
-      }))
+      })
+    )
     } else {
       const updatedCartList = [...cartList, product]
       this.setState({ cartList: updatedCartList })
@@ -92,7 +107,6 @@ class App extends Component {
     const { cartList } = this.state
     const productObject = cartList.find(eachItem => eachItem.id === id)
 
-
     if (productObject.quantity > 1) {
       this.setState(prevState => ({
         cartList: prevState.cartList.map(eachItem => {
@@ -111,6 +125,7 @@ class App extends Component {
 
   render() {
     const { isDarkTheme,favoriteList,cartList} = this.state
+    
     return (
       <AppContext.Provider value={{
         isDarkTheme, toggleTheme: this.toggleTheme,favoriteList,onAddFavorite: this.onAddFavorite,onRemoveFavorite: this.onRemoveFavorite,
