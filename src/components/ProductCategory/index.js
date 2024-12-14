@@ -4,6 +4,7 @@ import FailureView from "../FailureView";
 import Header from "../Header";
 import ProductItem from "../ProductItem";
 import PriceFilter from "../PriceFilter";
+// import PriceRangeFilter from '../PriceRangeFilter'
 
 import "./index.css"
 import AppContext from "../../Context/AppContext";
@@ -28,7 +29,7 @@ const apiStatusConstant = {
 
 
 class ProductCategory extends Component {
-    state = { productCategoryItemsList: [], activeOptionId: sortbyOptions[0].optionId, apiStatus: apiStatusConstant.initial }
+    state = { productCategoryItemsList: [], activeOptionId: sortbyOptions[0].optionId, apiStatus: apiStatusConstant.initial, selectedPriceRange: null, filteredProductList: [], }
 
     componentDidMount() {
         this.getCategoryItems()
@@ -39,8 +40,6 @@ class ProductCategory extends Component {
         const { match } = this.props
         const { params } = match
         const { slug } = params
-
-        console.log(match)
 
         const { activeOptionId } = this.state
 
@@ -57,14 +56,13 @@ class ProductCategory extends Component {
             const updatedData = fetchedData.products.map(eachItem => ({
                 id: eachItem.id,
                 title: eachItem.title,
-                category: eachItem.category,
-                price: eachItem.price,
+                price: Math.floor(eachItem.price),
                 rating: eachItem.rating,
                 thumbnail: eachItem.thumbnail,
-                discountPercentage: eachItem.discountPercentage,
                 stock: eachItem.stock
             }))
-            this.setState({ productCategoryItemsList: updatedData, apiStatus: apiStatusConstant.success })
+
+            this.setState({ productCategoryItemsList: updatedData, apiStatus: apiStatusConstant.success, filteredProductList: updatedData, })
         } else {
             this.setState({ apiStatus: apiStatusConstant.failure })
         }
@@ -74,17 +72,37 @@ class ProductCategory extends Component {
         this.setState({ activeOptionId }, this.getCategoryItems)
     }
 
+    filterByPriceRange = (priceRange) => {
+        const { productCategoryItemsList } = this.state;
+
+        if (priceRange) {
+            const filteredList = productCategoryItemsList.filter(
+                (item) =>
+                    item.price >= priceRange.min && item.price <= priceRange.max
+            );
+            this.setState({ filteredProductList: filteredList });
+        } else {
+            this.setState({ filteredProductList: productCategoryItemsList });
+        }
+    }
 
 
     renderCategoryItems = () => {
-        const { productCategoryItemsList } = this.state
-
+        const { filteredProductList } = this.state
         return (
-            <ul className="categoryItems-container">
-                {productCategoryItemsList.map(eachItem => (
-                    <ProductItem key={eachItem.id} productItemData={eachItem} />
-                ))}
-            </ul>
+            <>
+                {filteredProductList.length === 0 ? (
+                    <div className="no-products-view">
+                        No products found matching the selected criteria.
+                    </div>
+                ) : (
+                    <ul className="categoryItems-container">
+                        {filteredProductList.map(eachItem => (
+                            <ProductItem key={eachItem.id} productItemData={eachItem} />
+                        ))}
+                    </ul>
+                )}
+            </>
         )
     }
 
@@ -111,7 +129,7 @@ class ProductCategory extends Component {
             <AppContext.Consumer>
                 {value => {
                     const { isDarkTheme } = value
-                    const homeTheme = isDarkTheme? 'dark' : 'light'
+                    const homeTheme = isDarkTheme ? 'dark' : 'light'
 
                     return (
                         <>
@@ -121,6 +139,7 @@ class ProductCategory extends Component {
                                     activeOptionId={activeOptionId}
                                     sortbyOptions={sortbyOptions}
                                     changeSortby={this.changeSortby}
+                                    onChangePriceRange={this.filterByPriceRange}
                                 />
                                 {this.renderCategoryItemsView()}
                             </div>
