@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
 import Popup from 'reactjs-popup'
 import Cookies from "js-cookie";
-import { withRouter } from 'react-router-dom'
 import { FaRegUser, FaRegMoon } from "react-icons/fa";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineFavoriteBorder, MdOutlineShoppingBag, MdOutlineWbSunny } from "react-icons/md";
@@ -52,21 +51,28 @@ class Header extends Component {
       }}
     </AppContext.Consumer>
   )
+
+  onChangeSearchInput = event => {
+    const { changeSearchInput } = this.props;
+    if (changeSearchInput) {
+      changeSearchInput(event.target.value);
+    }
+  }
+
+  onEnterSearchInput = event => {
+    const { enterSearchInput } = this.props;
+    if (event.key === 'Enter' && enterSearchInput) {
+      enterSearchInput();
+    }
+  }
+
+
   render() {
     const { searchInput } = this.props
 
-    const onChangeSearchInput = event => {
-      const { changeSearchInput } = this.props
-      changeSearchInput(event.target.value)
-    }
-
-    const onEnterSearchInput = event => {
-      const { enterSearchInput } = this.props
-      if (event.key === 'Enter') {
-        enterSearchInput()
-      }
-    }
-
+    const { location } = this.props; 
+    const isLocations = location.pathname === '/' || location.pathname === '/favorite';
+    
     return (
       <AppContext.Consumer>
         {value => {
@@ -87,10 +93,12 @@ class Header extends Component {
                     className="logo"
                   />
                 </Link>
+                {isLocations &&(
                 <div className="search-container">
                   <IoSearchCircle size={25} onClick={this.handleSearchClick} />
-                  <input type="search" className="searchInput" onChange={onChangeSearchInput} onKeyDown={onEnterSearchInput} value={searchInput} placeholder="Search for products..." />
+                  <input type="search" className="searchInput" onChange={this.onChangeSearchInput} onKeyDown={this.onEnterSearchInput} value={searchInput} placeholder="Search for products..." />
                 </div>
+                )}
                 <div className="nav-link smThemeIcon">
                   <li onClick={onClickToggleTheme}>
                     {isDarkTheme ? (<MdOutlineWbSunny className="navIcon" />) : (<FaRegMoon className="navIcon" />)}

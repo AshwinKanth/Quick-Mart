@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { IoCloseCircleSharp } from "react-icons/io5";
 
 import AppContext from "../../Context/AppContext";
-
 import './index.css'
 
 
@@ -12,7 +11,6 @@ const FavoriteItem = (props) => {
 
     const productRating = String(rating).slice(0, 3);
     const stockAvailability = stock > 10 ? "" : "Only few Left"
-
 
     return (
         <AppContext.Consumer>

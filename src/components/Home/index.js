@@ -83,13 +83,12 @@ class Home extends Component {
     }
 
     changeSearchInput = searchInput => {
-        this.setState({ searchInput })
-    }
+        this.setState({ searchInput });
+      }
 
-    enterSearchInput = () => {
-        this.getProducts()
-    }
-
+      enterSearchInput = () => {
+        this.getProducts(); 
+      }
     renderProductsView = () => {
         const { apiStatus } = this.state
 

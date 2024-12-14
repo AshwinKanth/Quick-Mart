@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route,Switch,Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
 import Favorite from "./components/Favorite";
@@ -14,10 +14,17 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 
 class App extends Component {
-  state = { isDarkTheme: false,
-    favoriteList:JSON.parse(localStorage.getItem('favoriteList')) || [],
-    cartList:JSON.parse(localStorage.getItem('cartList')) || [] }
+  state = {
+    isDarkTheme: false,
+    favoriteList: JSON.parse(localStorage.getItem('favoriteList')) || [],
+    cartList: JSON.parse(localStorage.getItem('cartList')) || [],
+    searchInput: '',
+    productsData: [],
+  }
 
+  changeSearchInput = (newSearchInput) => {
+    this.setState({ searchInput: newSearchInput });
+  };
 
   componentDidUpdate(prevState) {
     if (prevState.favoriteList !== this.state.favoriteList) {
@@ -29,7 +36,7 @@ class App extends Component {
     }
   }
 
- 
+
   toggleTheme = () => {
     this.setState(prevState => ({ isDarkTheme: !prevState.isDarkTheme }));
   }
@@ -48,7 +55,7 @@ class App extends Component {
       }))
     } else {
       this.setState(prevState => ({
-        favoriteList: [...prevState.favoriteList, product ],
+        favoriteList: [...prevState.favoriteList, product],
       }))
     }
   }
@@ -74,7 +81,7 @@ class App extends Component {
           return eachCartItem
         })
       })
-    )
+      )
     } else {
       const updatedCartList = [...cartList, product]
       this.setState({ cartList: updatedCartList })
@@ -122,21 +129,49 @@ class App extends Component {
     }
   }
 
+  fetchProductsData = async () => {
+    const response = await fetch(`https://dummyjson.com/products?limit=0`);
+    if (response.ok) {
+      const data = await response.json();
+      const productsData = data.products.map((product) => ({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        thumbnail: product.thumbnail,
+        rating: product.rating,
+        stock: product.stock,
+      }));
+      this.setState({ productsData });
+    }
+  };
+
+  componentDidMount() {
+    this.fetchProductsData();
+  }
+
 
   render() {
-    const { isDarkTheme,favoriteList,cartList} = this.state
-    
+    const { isDarkTheme, favoriteList, cartList, productsData, searchInput } = this.state
+
     return (
       <AppContext.Provider value={{
-        isDarkTheme, toggleTheme: this.toggleTheme,favoriteList,onAddFavorite: this.onAddFavorite,onRemoveFavorite: this.onRemoveFavorite,
+        isDarkTheme, toggleTheme: this.toggleTheme, favoriteList, onAddFavorite: this.onAddFavorite, onRemoveFavorite: this.onRemoveFavorite,
         cartList, addCartItem: this.addCartItem, removeCartItem: this.removeCartItem, removeAllCartItems: this.removeAllCartItems,
-          IncrementCartItemQuantity: this.IncrementCartItemQuantity, decrementCartItemQuantity: this.decrementCartItemQuantity,
+        IncrementCartItemQuantity: this.IncrementCartItemQuantity, decrementCartItemQuantity: this.decrementCartItemQuantity,
+        searchInput,
+        productsData,
       }}>
         <Switch>
           <Route path="/login" component={Login} />
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/products/:id" component={ProductDetails} />
-          <ProtectedRoute exact path="/favorite" component={Favorite} />
+          <ProtectedRoute exact path="/favorite" render={(props) => (
+            <Favorite
+              {...props}
+              searchInput={this.state.searchInput}
+              changeSearchInput={this.changeSearchInput}
+            />
+          )} />
           <ProtectedRoute exact path="/cart" component={Cart} />
           <ProtectedRoute exact path='/products/category/:slug' component={ProductCategory} />
           <ProtectedRoute exact path="/checkout" component={Checkout} />
