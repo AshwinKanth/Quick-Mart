@@ -43,7 +43,7 @@ const CartItem = (props) => (
                             </button>
                         </div>
                         <div className='total-price-remove-container'>
-                            <p className='cart-total-price'>$ {price * quantity} /-</p>
+                            <p className='cart-total-price'>₹ {price * quantity} /-</p>
                             <button className='remove-button' type='button' onClick={onRemoveCartItem}>
                                 Remove
                             </button>

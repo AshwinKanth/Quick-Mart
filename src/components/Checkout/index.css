@@ -37,6 +37,13 @@
     color: green;
 }
 
+.orderDiscount{
+    font-size: 14px;
+    font-weight: bold;
+    color: #2b2a2a;
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 768px){
     .checkoutCartList-summary-container{
         width: 100%;

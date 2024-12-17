@@ -20,6 +20,10 @@ class Checkout extends Component {
                         total += eachItem.price * eachItem.quantity
                     })
 
+                    const totalAmount = Math.floor(total)
+                    const totalDiscount = Math.floor((10/100) * total)
+                    const totalAmountAterDiscount = Math.floor(totalAmount-totalDiscount)
+
                     return (
                         <div>
                             <Header />
@@ -31,9 +35,12 @@ class Checkout extends Component {
                                             <CheckoutCarItem cartItemDetails={eachBook} key={eachBook.isbn13} />
                                         ))}
                                     </ul>
-                                    <h1 className="order-total">Order Total: <span className="orderTotal-span">₹{total} /-</span></h1>
+                                    <h1 className="order-total">Order Total: <span className="orderTotal-span">₹{totalAmount} /-</span></h1>
+                                    <p >Discount 10%:<span className="orderDiscount"> - ₹{totalDiscount} /-</span></p>
                                     <p className="cartItems-count">{cartList.length} items in cart</p>
                                     <p className="deliveryText">Delivery Charges: <span className="deliveryTextSpan">FREE Delivery</span></p>
+                                    <hr />
+                                    <h1 className="order-total">Total Price: <span className="orderTotal-span">₹{totalAmountAterDiscount} /-</span></h1>
                                 </div>
                             </div>
                         </div>
