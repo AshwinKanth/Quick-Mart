@@ -10,6 +10,7 @@
 @media screen and (max-width: 768px){
     .filters-container{
       width: 100%;
+      padding-left: 15px;
     }
 }
 
