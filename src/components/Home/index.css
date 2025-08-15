@@ -1,11 +1,11 @@
-.home-container{
+.home-container {
     padding-top: 30px;
     padding-bottom: 20px;
     min-height: 100vh;
 }
 
 
-.products-container{
+.products-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -13,24 +13,29 @@
     flex-wrap: wrap;
 }
 
-@media screen and (max-width: 768px){
-    .home-container{
-        padding-top: 5px;
-        padding-bottom: 70px;
-    }.products-container{
+@media screen and (max-width: 768px) {
+    .home-container {
+        padding: 0 0 70px 0;
+        box-sizing: border-box;
+    }
+
+    .products-container {
         padding: 0px;
+        margin: 0px;
+        padding-top: 20px;
+        width: 100%;
     }
 }
 
-.dark{
+.dark {
     background-color: #aec3f1;
 }
 
-.light{
+.light {
     background-color: #fff;
 }
 
-.no-products-view{
+.no-products-view {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,47 +43,55 @@
     height: 100vh;
 }
 
-.no-products-view{
+.no-products-view {
     padding: 10px;
 }
 
 
-.no-products-img{
+.no-products-img {
     width: 20%;
 }
 
 @media screen and (max-width: 768px) {
-    .no-products-img{
+    .no-products-img {
         width: 60%;
-    }.no-products-view{
+    }
+
+    .no-products-view {
         height: 50vh;
     }
 }
 
-.no-products-heading{
+.no-products-heading {
     font-size: 25px;
     font-family: "Roboto";
 }
 
-.no-products-description{
+.no-products-description {
     font-size: 15px;
     font-family: "Roboto";
 }
 
-@media (min-width: 768px) and (max-width: 1100px){
-    .no-products-view{
+@media (min-width: 768px) and (max-width: 1100px) {
+    .no-products-view {
         height: 50vh;
-    }.no-products-img{
+    }
+
+    .no-products-img {
         width: 40%;
-    }.no-products-heading{
+    }
+
+    .no-products-heading {
         font-size: 30px;
-    }.no-products-description{
+    }
+
+    .no-products-description {
         font-size: 20px;
     }
 }
 
 
-.restaurantNavigation{
+.restaurantNavigation {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -86,7 +99,7 @@
     padding-bottom: 30px;
 }
 
-.angleIcon{
+.angleIcon {
     background-color: transparent;
     border: 1px solid #000;
     margin: 10px;
@@ -96,7 +109,7 @@
     cursor: pointer;
 }
 
-.pageNum{
+.pageNum {
     color: #334155;
     font-size: 14px;
     font-family: "Bree Serif";

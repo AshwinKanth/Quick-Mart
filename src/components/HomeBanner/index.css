@@ -25,17 +25,20 @@
 @media screen and (max-width: 768px){
     .slider-container{
         padding-top: 90px;
-        width: 88%;
+        width: 100%;
         margin: 0px;
+        padding-bottom: 30px;
         background-color: transparent;
-        height: 20vh;
+        display: block;
+        height: auto;
+        overflow: hidden;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1100px){
     .slider-container{
-        height: 20vh;
-        width: 95%;
+        height: auto;
+        width: 100%;
     }
 }
 
