@@ -48,5 +48,7 @@
         font-size: 12px;
     }.checkOutButton{
         font-size: 10px;
+    }.cartSummary-container{
+            margin-bottom: 50px;
     }
 }
